@@ -24,6 +24,17 @@ app.get('/todos/:id', (req, res) => {
     }
 });
 
+// Get a specific todo by ID (alternative endpoint)
+app.get('/todo/:id', (req, res) => {
+    const { id } = req.params;
+    const todo = todos.find(todo => todo.id === id);
+    if (todo) {
+        res.json(todo);
+    } else {
+        res.status(404).send('Todo not found');
+    }
+});
+
 // Add a new todo
 app.post('/todos', (req, res) => {
     const todo = req.body;
